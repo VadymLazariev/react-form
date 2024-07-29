@@ -2,9 +2,11 @@ declare function useInput<T = string, E = string>(props?: UseInput<T, E>): Input
 
 declare function useForm<T extends Inputs = Inputs>(props?: UseForm<T>): Form<T>;
 
+type Validator<T, E> = (value: T) => E | undefined | Promise<E | undefined>;
+
 export type UseInput<T, E> = {
   defaultValue?: T;
-  validate?: (value: T) => E | undefined |  Promise<E | undefined>;
+  validate?: Validator<T, E> | Validator<T, E>[];
   delay?: number;
 
   format?: (value: T) => T | string;
